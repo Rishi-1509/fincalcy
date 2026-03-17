@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinCalcyy - Investment & Savings Dashboard Calculator India</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+                <h1>FinCalcyy</h1>
+                <span class="india-flag">🇮🇳</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-section="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-btn" data-section="investor">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Investor Tools</span>
+                </button>
+                <button class="nav-btn" data-section="savings">
+                    <i class="fas fa-piggy-bank"></i>
+                    <span>Savings</span>
+                </button>
+                <button class="nav-btn" data-section="interest">
+                    <i class="fas fa-percentage"></i>
+                    <span>Interest Calculator</span>
+                </button>
+                <button class="nav-btn" data-section="ai-advisor">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Advisor</span>
+                </button>
+                <button class="nav-btn" data-section="about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2>Welcome to FinCalcyy India</h2>
+                    <p>Your personal financial calculator for Indian markets</p>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card investor-card" onclick="navigateTo('investor')">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Investor Calculator</h3>
+                        <p>Calculate investment returns, ROI, and compound growth for Indian investors</p>
+                        <button class="btn-primary">Explore <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="dashboard-card savings-card" onclick="navigateTo('savings')">
+                        <i class="fas fa-piggy-bank"></i>
+                        <h3>Savings Calculator</h3>
+                        <p>Plan your savings goals in Indian Rupees</p>
+                        <button class="btn-primary">Explore <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="dashboard-card interest-card" onclick="navigateTo('interest')">
+                        <i class="fas fa-percentage"></i>
+                        <h3>Interest Calculator</h3>
+                        <p>Calculate simple and compound interest rates</p>
+                        <button class="btn-primary">Explore <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="dashboard-card ai-card" onclick="navigateTo('ai-advisor')">
+                        <i class="fas fa-brain"></i>
+                        <h3>AI Financial Advisor</h3>
+                        <p>Get personalized saving plans and financial advice</p>
+                        <button class="btn-primary">Get Advice <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investor Tools Section -->
+            <section id="investor" class="section">
+                <div class="section-header">
+                    <h2>Investor Calculator</h2>
+                    <p>Calculate your investment returns and growth</p>
+                </div>
+                <div class="calculator-container">
+                    <div class="calculator-box">
+                        <h3>ROI Calculator</h3>
+                        <div class="form-group">
+                            <label>Initial Investment (₹)</label>
+                            <input type="number" id="investorInitial" placeholder="100000" value="100000">
+                        </div>
+                        <div class="form-group">
+                            <label>Final Value (₹)</label>
+                            <input type="number" id="investorFinal" placeholder="150000" value="150000">
+                        </div>
+                        <div class="form-group">
+                            <label>Investment Period (Years)</label>
+                            <input type="number" id="investorPeriod" placeholder="5" value="5" step="0.1">
+                        </div>
+                        <button class="btn-calculate" onclick="calculateROI()">Calculate ROI</button>
+                        <div id="roiResult" class="result"></div>
+                    </div>
+
+                    <div class="calculator-box">
+                        <h3>Investment Growth</h3>
+                        <div class="form-group">
+                            <label>Principal Amount (₹)</label>
+                            <input type="number" id="growthPrincipal" placeholder="50000" value="50000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Return Rate (%)</label>
+                            <input type="number" id="growthRate" placeholder="12" value="12" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Years</label>
+                            <input type="number" id="growthYears" placeholder="10" value="10" step="0.1">
+                        </div>
+                        <button class="btn-calculate" onclick="calculateInvestmentGrowth()">Calculate Growth</button>
+                        <div id="growthResult" class="result"></div>
+                    </div>
+                </div>
+            <div id="planOutput" class="plan-output" style="display:none;"></div>
+            </section>
+
+            <!-- Savings Section -->
+            <section id="savings" class="section">
+                <div class="section-header">
+                    <h2>Savings Calculator</h2>
+                    <p>Plan your financial goals and savings strategy</p>
+                </div>
+                <div class="calculator-container">
+                    <div class="calculator-box">
+                        <h3>Goal-Based Savings</h3>
+                        <div class="form-group">
+                            <label>Savings Goal (₹)</label>
+                            <input type="number" id="savingsGoal" placeholder="500000" value="500000">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Savings (₹)</label>
+                            <input type="number" id="savingsCurrent" placeholder="50000" value="50000">
+                        </div>
+                        <div class="form-group">
+                            <label>Time Frame (Months)</label>
+                            <input type="number" id="savingsTime" placeholder="24" value="24">
+                        </div>
+                        <button class="btn-calculate" onclick="calculateSavingsGoal()">Calculate Monthly Savings</button>
+                        <div id="savingsResult" class="result"></div>
+                    </div>
+
+                    <div class="calculator-box">
+                        <h3>Savings with Interest</h3>
+                        <div class="form-group">
+                            <label>Monthly Savings (₹)</label>
+                            <input type="number" id="monthlyAmount" placeholder="5000" value="5000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Interest Rate (%)</label>
+                            <input type="number" id="savingsInterestRate" placeholder="6.5" value="6.5" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (Months)</label>
+                            <input type="number" id="savingsDuration" placeholder="60" value="60">
+                        </div>
+                        <button class="btn-calculate" onclick="calculateSavingsWithInterest()">Calculate Total</button>
+                        <div id="savingsInterestResult" class="result"></div>
+                    </div>
+                </div>
+            <div id="planOutput" class="plan-output" style="display:none;"></div>
+            </section>
+
+            <!-- Interest Calculator Section -->
+            <section id="interest" class="section">
+                <div class="section-header">
+                    <h2>Interest Calculator</h2>
+                    <p>Calculate simple and compound interest</p>
+                </div>
+                <div class="calculator-container">
+                    <div class="calculator-box">
+                        <h3>Simple Interest</h3>
+                        <div class="form-group">
+                            <label>Principal Amount (₹)</label>
+                            <input type="number" id="simplePrincipal" placeholder="100000" value="100000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Interest Rate (%)</label>
+                            <input type="number" id="simpleRate" placeholder="7" value="7" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Time Period (Years)</label>
+                            <input type="number" id="simpleTime" placeholder="5" value="5" step="0.1">
+                        </div>
+                        <button class="btn-calculate" onclick="calculateSimpleInterest()">Calculate</button>
+                        <div id="simpleResult" class="result"></div>
+                    </div>
+
+                    <div class="calculator-box">
+                        <h3>Compound Interest</h3>
+                        <div class="form-group">
+                            <label>Principal Amount (₹)</label>
+                            <input type="number" id="compoundPrincipal" placeholder="100000" value="100000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Interest Rate (%)</label>
+                            <input type="number" id="compoundRate" placeholder="8" value="8" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Time Period (Years)</label>
+                            <input type="number" id="compoundTime" placeholder="5" value="5" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Compounding Frequency</label>
+                            <select id="compoundFreq">
+                                <option value="1">Annually</option>
+                                <option value="2">Semi-Annually</option>
+                                <option value="4">Quarterly</option>
+                                <option value="12" selected>Monthly</option>
+                                <option value="365">Daily</option>
+                            </select>
+                        </div>
+                        <button class="btn-calculate" onclick="calculateCompoundInterest()">Calculate</button>
+                        <div id="compoundResult" class="result"></div>
+                    </div>
+                </div>
+            <div id="planOutput" class="plan-output" style="display:none;"></div>
+            </section>
+
+
+            <!-- AI Financial Advisor Section -->
+            <section id="ai-advisor" class="section">
+                <div class="section-header">
+                    <h2>AI Financial Advisor</h2>
+                    <p>Get personalized financial advice and saving plans</p>
+                </div>
+
+                <div class="ai-container">
+                    <div class="ai-chat-container">
+                        <div class="chat-header">
+                        <div class="ai-controls">
+                            <label>Agent:</label>
+                            <select id="agentSelector">
+                                <option value="planner">Financial Planner</option>
+                                <option value="insurance">Insurance Guide</option>
+                                <option value="retirement">Retirement Coach</option>
+                            </select>
+                            <button class="btn-small" id="fullScreenBtn" onclick="toggleFullScreen()">Full Screen</button>
+                        </div>
+                            <i class="fas fa-robot"></i>
+                            <h3>FinCalcyy AI Assistant</h3>
+                            <span class="status online">Online</span>
+                        </div>
+
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message ai-message">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <p>Hello! I'm your AI Financial Advisor. I'll help you create a personalized saving plan. Let's start by gathering some information about your finances.</p>
+                                    <button class="btn-small" onclick="startQuestionnaire()">Get Started</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input-container">
+                            <input type="text" id="chatInput" placeholder="Type your message..." disabled>
+                            <button id="sendButton" disabled><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="questionnaire-container" id="questionnaire" style="display: none;">
+                        <div class="saved-plans" id="savedPlans" style="display: none;">
+                            <div class="saved-plans-header">
+                                <h3>Saved Plans</h3>
+                                <button class="btn-small" onclick="clearSavedPlans()">Clear</button>
+                            </div>
+                            <div id="savedPlansList"></div>
+                        </div>
+                        <div class="questionnaire-header">
+                            <h3>Financial Assessment</h3>
+                            <p>Help us understand your situation better</p>
+                        </div>
+
+                        <form id="financialForm" class="questionnaire-form">
+                            <div class="form-step active" id="step1">
+                                <h4>Step 1: Basic Information</h4>
+                                <div class="form-group">
+                                    <label>Monthly Income (₹)</label>
+                                    <input type="number" id="monthlyIncome" placeholder="50000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Monthly Expenses (₹)</label>
+                                    <input type="number" id="monthlyExpenses" placeholder="35000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Current Savings (₹)</label>
+                                    <input type="number" id="currentSavings" placeholder="100000" required>
+                                </div>
+                                <button type="button" class="btn-next" onclick="nextStep(2)">Next</button>
+                            </div>
+
+                            <div class="form-step" id="step2">
+                                <h4>Step 2: Financial Goals</h4>
+                                <div class="form-group">
+                                    <label>Saving Goal (₹)</label>
+                                    <input type="number" id="savingGoal" placeholder="500000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Time Frame (Months)</label>
+                                    <input type="number" id="timeFrame" placeholder="24" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Risk Tolerance</label>
+                                    <select id="riskTolerance" required>
+                                        <option value="">Select risk level</option>
+                                        <option value="low">Low - Conservative</option>
+                                        <option value="medium">Medium - Balanced</option>
+                                        <option value="high">High - Aggressive</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn-prev" onclick="prevStep(1)">Previous</button>
+                                <button type="button" class="btn-next" onclick="nextStep(3)">Next</button>
+                            </div>
+
+                            <div class="form-step" id="step3">
+                                <h4>Step 3: Lifestyle & Debts</h4>
+                                <div class="form-group">
+                                    <label>Monthly Debt Payments (₹)</label>
+                                    <input type="number" id="debtPayments" placeholder="5000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Emergency Fund (Months)</label>
+                                    <input type="number" id="emergencyFund" placeholder="6" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Life Insurance Coverage (₹)</label>
+                                    <input type="number" id="lifeInsurance" placeholder="500000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Health Insurance Coverage (₹)</label>
+                                    <input type="number" id="healthInsurance" placeholder="300000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Investment Experience</label>
+                                    <select id="investmentExp" required>
+                                        <option value="">Select experience</option>
+                                        <option value="beginner">Beginner</option>
+                                        <option value="intermediate">Intermediate</option>
+                                        <option value="advanced">Advanced</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn-prev" onclick="prevStep(2)">Previous</button>
+                                <button type="submit" class="btn-submit">Get My Plan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="section-header">
+                    <h2>About FinCalcyy</h2>
+                    <p>Know more about us</p>
+                </div>
+                <div class="about-container">
+                    <div class="about-box">
+                        <div class="about-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>FinCalcyy is dedicated to making financial calculations simple and accessible for every Indian. We believe that financial literacy should be within reach of everyone, regardless of their background or experience level.</p>
+                    </div>
+
+                    <div class="about-box">
+                        <div class="about-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>What We Offer</h3>
+                        <p>Our platform provides easy-to-use calculators for investors and savers in India. Whether you're planning for retirement, calculating investment returns, or tracking savings goals, FinCalcyy helps you make informed financial decisions.</p>
+                    </div>
+
+                    <div class="about-box">
+                        <div class="about-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Our Commitment</h3>
+                        <p>We are committed to providing accurate calculations based on standard financial formulas. Your financial data is processed locally in your browser for maximum privacy and security.</p>
+                    </div>
+
+                    <div class="about-box developer-box">
+                        <div class="about-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Developed By</h3>
+                        <p style="font-size: 18px; font-weight: 700; color: #667eea;">RISHI VS</p>
+                        <p>Creating financial tools that empower Indian investors and savers</p>
+                    </div>
+                </div>
+
+                <div class="features-section">
+                    <h3>Key Features</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-bolt"></i>
+                            <h4>Fast & Accurate</h4>
+                            <p>Instant calculations with precise financial formulas</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Secure & Private</h4>
+                            <p>All calculations done locally in your browser</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>Mobile Friendly</h4>
+                            <p>Works perfectly on all devices</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-free"></i>
+                            <h4>Completely Free</h4>
+                            <p>No hidden charges or premium features</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h3>Contact & Support</h3>
+                    <p>For feedback, suggestions, or support, feel free to reach out:</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> Email: fencerrishis@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> Support: 9043803254</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
